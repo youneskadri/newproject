@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+  http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="item-report" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20">
+    <parameter name="logo" class="java.lang.Object" isForPrompting="false">
+        <parameterDescription><![CDATA[The letterhead image]]></parameterDescription>
+        <defaultValueExpression><![CDATA[]]></defaultValueExpression>
+    </parameter>
+    <parameter name="title" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="totalAmount" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="NomFournisseur" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="eventNom" class="java.lang.String" isForPrompting="false"/>
+    <field name="quantite" class="java.lang.Integer"/>
+    <field name="produit.nom" class="java.lang.String"/>
+    <field name="prixUnitaire" class="java.lang.Integer"/>
+    <title>
+        <band height="50" splitType="Stretch">
+            <textField>
+                <reportElement x="200" y="0" width="200" height="50" />
+                <textElement>
+                <font size="25"/> </textElement>
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{title}]]></textFieldExpression>
+
+            </textField>
+            <image>
+                <reportElement x="500" y="0" width="154" height="30"/>
+                <imageExpression><![CDATA[$P{logo}]]></imageExpression>
+            </image>
+        </band>
+
+    </title>
+
+    <pageHeader>
+
+        <band height="30" splitType="Stretch">
+            <staticText>
+                <reportElement x="20" y="0" width="100" height="30"/>
+                <text><![CDATA[Nom de fournisseur :]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="130" y="0" width="100" height="30"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{NomFournisseur}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="260" y="0" width="100" height="30"/>
+                <text><![CDATA[Nom de evenement :]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="370" y="0" width="200" height="30"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.String"><![CDATA[$P{eventNom}]]></textFieldExpression>
+            </textField>
+
+        </band>
+
+    </pageHeader>
+
+    <detail>
+        <band height="20" splitType="Stretch">
+
+            <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+                <reportElement x="50" y="0" width="170" height="20"/>
+                <box>
+                    <pen lineWidth="1.0" lineColor="#000"/>
+                </box>
+                <textElement/>
+                <textFieldExpression class="java.lang.String"><![CDATA[$F{produit.nom}]]></textFieldExpression>
+            </textField>
+
+            <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+                <reportElement x="220" y="0" width="100" height="20" />
+                <box>
+                    <pen lineWidth="1.0" lineColor="#000"/>
+                </box>
+                <textElement/>
+                <textFieldExpression class="java.lang.Integer"><![CDATA[$F{quantite}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+                <reportElement x="320" y="0" width="100" height="20" />
+                <box>
+                    <pen lineWidth="1.0" lineColor="#000"/>
+                </box>
+                <textElement/>
+                <textFieldExpression class="java.lang.Integer"><![CDATA[$F{prixUnitaire}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <summary>
+        <band height="30" splitType="Stretch">
+            <staticText>
+                <reportElement x="20" y="0" width="150" height="30"/>
+                <text><![CDATA[Somme totale de prix :]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="170" y="0" width="200" height="30"/>
+                <textElement/>
+                <textFieldExpression class="java.lang.Double"><![CDATA[$P{totalAmount}]]></textFieldExpression>
+            </textField>
+        </band>
+    </summary>
+</jasperReport>
