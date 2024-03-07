@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des événements</title>
+    <style>
+        th {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Liste des événements</h1>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" (keyup)="searchFunction()" placeholder="Rechercher des événements...">
+        </div>
+
+        <table id="eventTable" class="event-table">
+            <thead>
+                <tr>
+                    <th (click)="sortTable('title')"> <strong>Titre</strong></th>
+                    <th (click)="sortTable('description')"> <strong>Description</strong></th>
+                    <th (click)="sortTable('capacity')"> <strong>Capacité</strong></th>
+                    <th (click)="sortTable('status')"> <strong>Statut</strong></th> <!-- Modification de "Status" à "Statut" -->
+                    <th (click)="sortTable('datedebut')"> <strong>Date de début</strong></th>
+                    <th (click)="sortTable('datefin')"> <strong>Date de fin</strong></th>
+                    <th (click)="sortTable('adresse')"> <strong>Adresse</strong></th>
+                    <th><strong>Image</strong></th>
+                    <th (click)="sortTable('starRating')"> <strong>Évaluation</strong></th> <!-- Modification de "Note" à "Évaluation" -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let evenement of evenements" class="event-row" [@fadeInOut]>
+                    <td class="event-cell">{{ evenement.title }}</td>
+                    <td class="event-cell">{{ evenement.description }}</td>
+                    <td class="event-cell">{{ evenement.capacity }}</td>
+                    <td class="event-cell">{{ evenement.status }}</td>
+                    <td class="event-cell">{{ evenement.datedebut }}</td>
+                    <td class="event-cell">{{ evenement.datefin }}</td>
+                    <td class="event-cell">{{ evenement.adresse }}</td>
+                    <td class="event-cell image-cell"><img [src]="evenement.image" alt="Image événement"></td>
+                    <td class="event-cell">{{ evenement.starRating }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="export__file">
+            <button (click)="exportToCSV()">Export to CSV</button>
+        </div>
+    </div>
+</body>
+</html>

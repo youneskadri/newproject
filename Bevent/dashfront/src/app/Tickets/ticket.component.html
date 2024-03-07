@@ -1,0 +1,115 @@
+<div class="container">
+  <h1>Tickets</h1>
+
+  <!-- Notification -->
+  <div *ngIf="isModified" class="notification">Formulaire modifié</div>
+
+  <!-- Bouton pour ouvrir le formulaire d'ajout de ticket -->
+  <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#ajouterTicketModal">Ajouter Ticket</button>
+
+  <!-- Modal pour le formulaire d'ajout de ticket -->
+  <div class="modal fade" id="ajouterTicketModal" tabindex="-1" role="dialog" aria-labelledby="ajouterTicketModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ajouterTicketModalLabel">Ajouter Ticket</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form [formGroup]="ticketForm" (ngSubmit)="addTicket()" class="form">
+          <div class="modal-body">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="nbrticket">Nombre de Tickets</label>
+                <input type="number" formControlName="nbrticket" class="form-control" id="nbrticket" placeholder="Entrer le nombre de tickets" required>
+                <div *ngIf="ticketForm.get('nbrticket').invalid && (ticketForm.get('nbrticket').dirty || ticketForm.get('nbrticket').touched)" class="text-danger">
+                  Le nombre de tickets est requis
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="type">Type</label>
+                <input type="text" formControlName="type" class="form-control" id="type" placeholder="Entrer le type" required>
+                <div *ngIf="ticketForm.get('type').invalid && (ticketForm.get('type').dirty || ticketForm.get('type').touched)" class="text-danger">
+                  Le type est requis
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="prix">Prix</label>
+                <input type="number" formControlName="prix" class="form-control" id="prix" placeholder="Entrer le prix" required>
+                <div *ngIf="ticketForm.get('prix').invalid && (ticketForm.get('prix').dirty || ticketForm.get('prix').touched)" class="text-danger">
+                  Le prix est requis
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="description">Description</label>
+                <textarea formControlName="description" class="form-control" id="description" placeholder="Entrer la description" required></textarea>
+                <div *ngIf="ticketForm.get('description').invalid && (ticketForm.get('description').dirty || ticketForm.get('description').touched)" class="text-danger">
+                  La description est requise
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="numero">Numéro</label>
+                <input type="text" formControlName="numero" class="form-control" id="numero" placeholder="Entrer le numéro" required>
+                <div *ngIf="ticketForm.get('numero').invalid && (ticketForm.get('numero').dirty || ticketForm.get('numero').touched)" class="text-danger">
+                  Le numéro est requis
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="datevente">Date de Vente</label>
+                <input type="date" formControlName="datevente" class="form-control" id="datevente" required>
+                <div *ngIf="ticketForm.get('datevente').invalid && (ticketForm.get('datevente').dirty || ticketForm.get('datevente').touched)" class="text-danger">
+                  La date de vente est requise
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tableau pour afficher les tickets -->
+  <table class="table mt-4">
+    <thead class="thead-dark">
+      <tr>
+        <th>Nombre de Tickets</th>
+        <th>Type</th>
+        <th>Prix</th>
+        <th>Description</th>
+        <th>Numéro</th>
+        <th>Date de Vente</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ticket of tickets">
+        <td>{{ ticket.nbrticket }}</td>
+        <td>{{ ticket.type }}</td>
+        <td>{{ ticket.prix }}</td>
+        <td>{{ ticket.description }}</td>
+        <td>{{ ticket.numero }}</td>
+        <td>{{ ticket.datevente | date }}</td>
+        <td>
+          <button class="btn btn-info btn-sm mr-1" (click)="selectTicket(ticket)">
+            <i class="fa fa-pencil"></i>
+          </button>
+          <button class="btn btn-danger btn-sm mr-1" (click)="deleteTicket(ticket.idticket)">
+            <i class="fa fa-trash"></i>
+          </button>
+          <button class="btn btn-primary btn-sm" (click)="updateTicket()">
+            <i class="fa fa-refresh"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
