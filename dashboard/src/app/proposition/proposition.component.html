@@ -1,0 +1,53 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="card card-plain">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title mt-0"> Table Of Propositions </h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead class="">
+                <th>
+                  evenement
+                </th>
+                <th>
+                  nombreParticipants
+                </th>
+                <th>
+
+                </th>
+                </thead>
+                <tbody>
+                <tr *ngFor="let prop of proposations">
+
+
+                  <td>
+                    {{prop?.nom}}
+                  </td>
+                  <td>
+                    {{prop?.nombreReservation}}
+                  </td>
+                  <td *ngIf="!prop?.idEvent"></td>
+
+
+                  <td>
+                    <button mat-raised-button color="primary"(click)="onclick(prop?.id,prop.idEvent)">Ajouter une offre</button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

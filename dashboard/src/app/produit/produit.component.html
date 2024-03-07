@@ -1,0 +1,51 @@
+<div class="container">
+    <br><br>
+  <h1>Liste des Besions </h1>
+  <form [formGroup]="produitForm" (ngSubmit)="addProduit()">
+    <div class="form-group">
+      <label for="nom">Nom:</label>
+      <input type="text" class="form-control" id="nom" formControlName="nom" placeholder="Entrez le nom">
+      <div *ngIf="produitForm.get('nom').invalid && produitForm.get('nom').touched">
+        <div *ngIf="produitForm.get('nom').errors.required">Le nom est requis.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input type="text" class="form-control" id="description" formControlName="description" placeholder="Entrez la description">
+      <div *ngIf="produitForm.get('description').invalid && produitForm.get('description').touched">
+        <div *ngIf="produitForm.get('description').errors.required">La description est requise.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="prix">Prix:</label>
+      <input type="number" class="form-control" id="prix" formControlName="prix" placeholder="Entrez le prix">
+      <div *ngIf="produitForm.get('prix').invalid && produitForm.get('prix').touched">
+        <div *ngIf="produitForm.get('prix').errors.required">Le prix est requis.</div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">{{ updateMode ? 'Enregistrer les modifications' : 'Ajouter Produit' }}</button>
+</form>
+  <hr>
+  <h2>Liste des Produits</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Description</th>
+        <th scope="col">Prix</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let produit of produits">
+        <td>{{ produit.nom }}</td>
+        <td>{{ produit.description }}</td>
+        <td>{{ produit.prix }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="updateProduit(produit)">Modifier</button>
+          <button class="btn btn-danger" (click)="deleteProduit(produit.id)">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

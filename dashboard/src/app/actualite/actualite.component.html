@@ -1,0 +1,91 @@
+
+
+
+<div>
+
+    <br><br><br>
+    <h2>Ajout Actualité</h2>
+    <form>
+
+        <div>
+            <label>Images</label>
+            <input type="file"  (change)="fileuploded($event)">
+            <label>actuality</label>
+            <input type="text" required [(ngModel)]="actuality">
+        </div>
+        <div>
+            <button (click)="onSubmit()">Ajouter Actualité</button>
+        </div>
+    </form>
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card card-plain">
+                        <div class="card-header card-header-danger">
+                            <h4 class="card-title mt-0"> Table Of Actuality </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="">
+                                    <th>
+                                        actuality
+                                    </th>
+                                    <th>
+                                        date pub
+                                    </th>
+                                    <th>
+                                        image
+                                    </th>
+                                    <th>
+
+                                    </th>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let act of actualites">
+
+
+                                        <td>
+                                            {{act?.actuality}}
+                                        </td>
+                                        <td>
+                                            {{act?.datePub}}
+                                        </td>
+                                        <td *ngIf="!act?.imageUrl"></td>
+                                        <td><img style="width: 100px;height: 100px" [src]="act.imageUrl"></td>
+
+
+                                        <td>
+                                            <button mat-raised-button color="primary"(click)="update(act?.idActualite)">update </button>
+                                        </td>
+                                        <td>
+                                            <button mat-raised-button color="warn"(click)="delete(act?.idActualite)">delete </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,23 @@
+<div>
+    <br><br><br>
+    <h2>Ajout Offre</h2>
+
+    <div>
+        <label>Nom Fournissseur</label>
+        <input type="text" required [(ngModel)]="nameFournisseur">
+    </div>
+    <div *ngFor="let product of products">
+        <label>Product</label>
+        <label>name</label>
+        <input type="text"  [value]="product.nom" readonly>
+        <label>price</label>
+        <input type="number"  [(ngModel)]="prix[product.id]" required>
+        <label>quantity</label>
+        <input type="number" [(ngModel)]="quantite[product.id]">
+    </div>
+    <p *ngIf="!nom" style="color: red">required values</p>
+    <div *ngIf="!updateMode">
+        <button (click)="addOffre()">Ajouter offre</button>
+    </div>
+
+</div>

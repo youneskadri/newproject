@@ -1,0 +1,61 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="card card-plain">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title mt-0"> Table Of Propositions </h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead class="">
+
+
+                <th>
+                  evenement
+                </th>
+                <th>
+                   Offre
+                </th>
+                <th>
+                  Statut
+                </th>
+                </thead>
+                <tbody>
+                <tr *ngFor="let offre of offres">
+                  <td>
+                    {{offre?.proposition?.evenement?.nom}}
+                  </td>
+
+                  <td>
+                    {{offre?.ligneOffre?.id}}
+                  </td>
+                  <td>
+                    {{offre.statut}}
+                  </td>
+                  <td>
+                    {{offre.nomFournisseur}}
+                  </td>
+
+
+                  <td>
+                    <button mat-raised-button color="primary"(click)="updateOffrePdf(offre?.idOffre,offre.statut)" >accepter l'offre</button>
+                    <button mat-raised-button color="warn"(click)="updateOffre(offre?.idOffre,offre.statut)">refuser l'offre</button>
+
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
